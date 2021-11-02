@@ -1,0 +1,34 @@
+{% extends 'master/base.html' %}
+
+{% block 'title' %} Who are you ? {% endblock %}
+
+{% block 'content' %}
+  <div class="container">
+      <div class="row justify-content-md-center" style="margin-top:10%;">
+          <div class="col col-lg-6">
+              {% include 'partial/message.html' %}
+              <div class="card">
+                  <div class="card-header">
+                      Who are you ?
+                  </div>
+                  <div class="card-body" style="padding-left:20%">
+                      <a href="{% url 'customer_create' %}" class="btn btn-success"> I am Customer</a> | <a href="{% url 'barber_create' %}" class="btn btn-danger"> I am Barber</a>
+
+
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+{% endblock %}
+
+{% block 'css' %}
+<style>
+    body{
+    background-color:brown;
+    }
+</style>
+
+
+{% endblock %}

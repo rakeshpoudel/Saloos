@@ -1,0 +1,30 @@
+.profile{
+    height:300px;
+    width:300px;
+    border-radius:300px;
+}
+
+.aligncenter{
+ text-align:center;
+}
+
+.floatright{
+float:right;
+}
+.block{
+display:block;
+text-align:center;
+color:red;
+font-size:30px;
+margin-left:-15%;
+margin-top:-15%;
+}
+
+
+.icon{
+display:block;
+color:blue;
+height:150px;
+width:150px;
+border-radius:200px;
+}

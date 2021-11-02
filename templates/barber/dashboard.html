@@ -1,0 +1,113 @@
+{% extends 'master/base.html' %}
+
+{% load static %}
+
+{% block 'title' %} Barber DashBoard  {% endblock %}
+
+{% block 'content' %}
+
+{% include 'barber/partial/navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{% if barber.profile %}{{MEDIA_URL}}{{barber.profile.url}} {% else %} https://iitnepal.edu.np/wp-content/uploads/2019/12/22.jpg {% endif %}" class="profile">
+                <a href="#ProfilechangeModal" class="block" data-bs-target="#ProfilechangeModal" data-bs-toggle="modal"><i class="bi bi-camera"></i></a>
+                <hr/>
+                <h5 class="aligncenter">{{barber.name}}</h5>
+                <p class="aligncenter">{{barber.address}}</p>
+                <p class="aligncenter">{{barber.contactNo}}</p>
+                <div class="card">
+                    <div class="card-header">
+                        Services <a href="#ServiceModal" data-bs-toggle="modal" data-bs-target="#ServiceModal" class="floatright"><i class="bi bi-plus-circle"></i></a>
+                </div>
+                    <div class="card-body">
+                        {% for s in services %}
+                        <span class="badge bg-primary">{{ s.servicetitle }}</span><a  style="float:right;" href="{% url 'delete_service' s.id %}"><i class="bi bi-trash-fill"></i></a> <br/> <hr>
+                        {% endfor %}
+                    </div>
+            </div>
+
+            </div>
+            <div class="col-md-8">
+            <div class="container">
+                    <div class="row">
+                        {% for s in services %}
+                            <img class="icon" src="{% if s.icon %} {{MEDIA_URL}} {{s.icon.url}} {% else %} {% static 'haircut.png' %} {% endif %}">
+                                <h5 style="color:red;">{{ s.servicetitle }}</h5>
+                            <p style="color:red;">{{ s.description }} </p>
+                            <p style="color:black">price:{{s.price}}</p>
+                            <hr style="white;">
+
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+
+    </div>
+    </div>
+
+<!-- profilechange modal -->
+<div class="modal fade" id="ProfilechangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel1">Change Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+              {{changeImageForm}}
+              {% csrf_token %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+<!-- end of profilechange modal -->
+
+<!-- Service Modal -->
+
+<div class="modal fade" id="ServiceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Service</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+              {{serviceform}}
+
+              {% csrf_token %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- end of Service Modal -->
+
+{% endblock %}
+
+{% block 'css' %}
+<style>
+    body{
+    background-color:pink;
+    }
+</style>
+
+
+{% endblock %}
+
+
